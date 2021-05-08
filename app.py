@@ -12,9 +12,14 @@ class HelloWorld(Resource):
         print(f'Secrets: {secrets}')
         mongo_connection  = connect(credentials=secrets, collection='Cards')
         print(f'Mongo Connection: {mongo_connection}')
-        result = mongo_connection.find()
-        print(f'Result: {result}')
-        return jsonify(data=result)
+        
+        cards = []
+        for card in mongo_connection.find({}):
+            id = str(card.pop('_id'))
+            card['id'] = id
+            cards.append(card)
+        return  jsonify(code=200, data=cards)
+        
 
 
 api.add_resource(HelloWorld, '/cards/all')
