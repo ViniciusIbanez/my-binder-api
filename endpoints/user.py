@@ -13,4 +13,4 @@ class User(Resource):
         mongo_connection = connect(credentials=secrets, collection='User')
         response = insert_user(request_data, mongo_connection)
 
-        return response
+        return {"deu" : "certo"}
