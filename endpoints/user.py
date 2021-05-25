@@ -11,7 +11,7 @@ class User(Resource):
         if request.get_json():
             request_data = request.get_json()
             print(request_data)
-        user = request_data['user']
+            user = request_data['user']
         secrets = retrieve_secrets()
        # mongo_connection = connect(credentials=secrets, collection='User')
         #response = insert_user(request_data, mongo_connection)
