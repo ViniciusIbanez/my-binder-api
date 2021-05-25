@@ -8,7 +8,7 @@ import logging
 class User(Resource):
 
     def post(self):
-        request_data = request.data
+        request_data = request.get_json()
         logging.info(request_data)
         print(f'Request data: {request_data}')
         user = request_data.get("user")
