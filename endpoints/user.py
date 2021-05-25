@@ -8,7 +8,8 @@ class User(Resource):
 
     def post(self):
         request_data = request.get_json()
-        user= request_data['user']
+        print(request)
+        user = request_data['user']
         secrets = retrieve_secrets()
         mongo_connection = connect(credentials=secrets, collection='User')
         response = insert_user(request_data, mongo_connection)
