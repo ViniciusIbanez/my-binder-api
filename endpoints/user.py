@@ -3,15 +3,17 @@ from flask import Flask, jsonify, request
 from connectors.mongo import connect
 from helpers.secrets_helper import retrieve_secrets
 from helpers.user_helper import *
+import logging
 
 class User(Resource):
 
     def post(self):
-        request_data = request.get_json()
-        print(request)
+        if request.get_json():
+            request_data = request.get_json()
+            print(request_data)
         user = request_data['user']
         secrets = retrieve_secrets()
-        mongo_connection = connect(credentials=secrets, collection='User')
-        response = insert_user(request_data, mongo_connection)
+       # mongo_connection = connect(credentials=secrets, collection='User')
+        #response = insert_user(request_data, mongo_connection)
 
-        return {"deu" : "certo"}
+        return {"deu" : request_data}
