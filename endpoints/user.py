@@ -11,9 +11,9 @@ class User(Resource):
         request_data = request.data
         logging.info(request_data)
         print(f'Request data: {request_data}')
-        user = 'teste'
+        user = request_data.get("user")
         secrets = retrieve_secrets()
         mongo_connection = connect(credentials=secrets, collection='User')
         response = insert_user({'user': user}, mongo_connection)
 
-        return {"response" : request_data}
+        return response
