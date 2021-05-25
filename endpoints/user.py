@@ -15,6 +15,6 @@ class User(Resource):
             user = request_data['user']
         secrets = retrieve_secrets()
         mongo_connection = connect(credentials=secrets, collection='User')
-        response = insert_user(request_data, mongo_connection)
+        response = insert_user({'user': user}, mongo_connection)
 
         return {"response" : request_data}
