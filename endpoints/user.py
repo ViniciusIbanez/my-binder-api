@@ -8,11 +8,9 @@ import logging
 class User(Resource):
 
     def post(self):
-        request_data = None
-        if request.get_json():
-            request_data = request.data
-            print(request_data)
-            user = request_data['user']
+        request_data = request.data
+        logging.info(request_data)
+        user = request_data['user']
         secrets = retrieve_secrets()
         mongo_connection = connect(credentials=secrets, collection='User')
         response = insert_user({'user': user}, mongo_connection)
