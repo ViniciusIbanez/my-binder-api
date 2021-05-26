@@ -36,10 +36,8 @@ def retrieve_cards_by_id(cards_list, mongo_connection):
         )
         cards = []
         for record in response:
-            print(f'Record: {record}')
             for card in record.get('data'):
                 if card.get('multiverse_id') in cards_list:
-                    print(f'Adding: {card}')
                     cards.append(card)
         return cards
     except Exception as ex:
