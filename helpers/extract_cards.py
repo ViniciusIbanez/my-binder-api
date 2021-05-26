@@ -16,13 +16,15 @@ def extract_set(set_code:str) -> dict:
             'multiverse_id': card.multiverse_id,
             'image_url': card.image_url   
         }
-        cards_object[card.name].append(data)
+        cards_object[card.name] = data
+
     return cards_object
 
 def load_set(cards_object: dict,
              mongo_connection) ->str:
     try:
         for card_name, data in cards_object.items():
+            print(data)
             response = (
                 mongo_connection
                 .find_one_and_update(
