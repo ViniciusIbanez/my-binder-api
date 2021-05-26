@@ -9,11 +9,9 @@ class User(Resource):
 
     def post(self):
         request_data = request.get_json()
-        logging.info(request_data)
-        print(f'Request data: {request_data}')
         user = request_data.get("user")
         secrets = retrieve_secrets()
         mongo_connection = connect(credentials=secrets, collection='User')
         response = insert_user({'user': user}, mongo_connection)
-
+        
         return response
