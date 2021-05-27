@@ -11,7 +11,7 @@ def insert_cards(cards_object: dict,
                 mongo_connection
                 .find_one_and_update(
                     {'id': cards_object.get('user')},
-                    {'$push': {'cards': card}},
+                    {'$addToSet': {'cards': card}},
                     upsert = True) )
         return response
     except Exception as ex:
