@@ -22,5 +22,8 @@ class User(Resource):
             'cards': ["438567", "438570", "438571"]
         }
         insert_cards(cards_object, binders_connection)
-        
-        return response
+
+        if cards_object:
+            return  jsonify(code = 200)
+        else:
+            return jsonify(code = 403)
