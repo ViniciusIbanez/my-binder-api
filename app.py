@@ -11,6 +11,9 @@ api = Api(app)
 api.add_resource(CardsEtl, '/extract/set')
 api.add_resource(User, '/user/insert')
 api.add_resource(Binder, '/binder/insert-card')
+api.add_resource(RetrieveBinder, '/binder/retrieve')
+api.add_resource(InsertRandom, '/card/insert-random')
+
 if __name__ == '__main__':
     app.run(debug=True)
     gunicorn_logger = logging.getLogger('gunicorn.error')
