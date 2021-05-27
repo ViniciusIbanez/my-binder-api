@@ -33,3 +33,25 @@ class RetrieveBinder(Resource):
                 return jsonify(code = 200, body={"cards": cards})
             else:
                 return jsonify(code = 403)
+
+class InsertRandom(Resource):
+
+    def post(self):
+        user_id = request.get_json().get('user')
+        secrets = retrieve_secrets()
+        binders_connection = connect(credentials=secrets, collection='Binders')
+        cards_list = retrieve_cards_from_user(user_id, binders_connection)
+        cards_connection = connect(credentials=secrets, collection='Cards')
+        cards = retrieve_random_card(cards_list, cards_connection)
+        
+        card_object = {
+            'user': user_id,
+            'cards': [cards]
+        }
+
+        insert_cards(card_object, binders_connection)
+
+        if insert_cards:
+            return  jsonify(code = 200)
+        else:
+            return jsonify(code = 403)

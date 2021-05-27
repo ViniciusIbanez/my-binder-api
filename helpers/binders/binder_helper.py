@@ -1,6 +1,7 @@
 from pymongo import database
 from connectors.mongo import connect
 import logging
+from random import randint
 
 def insert_cards(cards_object: dict,
              mongo_connection) ->str:
@@ -42,3 +43,16 @@ def retrieve_cards_by_id(cards_list, mongo_connection):
         return cards
     except Exception as ex:
         logging.error(f'MongoHelper:{ex}')
+
+def retrieve_random_card(cards_list, mongo_connection):
+    
+    response = (
+        mongo_connection.find({"data.multiverse_id": {'$nin': cards_list}})
+    )
+    
+    id_list = []
+    for element in response:
+        id_list.append(element.get('data')[0].get('multiverse_id'))
+    
+    return id_list[randint(0, len(id_list))]
+    
