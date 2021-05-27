@@ -1,6 +1,7 @@
 from pymongo import database
 from connectors.mongo import connect
 import logging
+from random import randint
 
 def insert_cards(cards_object: dict,
              mongo_connection) ->str:
@@ -10,7 +11,7 @@ def insert_cards(cards_object: dict,
                 mongo_connection
                 .find_one_and_update(
                     {'id': cards_object.get('user')},
-                    {'$push': {'cards': card}},
+                    {'$addToSet': {'cards': card}},
                     upsert = True) )
         return response
     except Exception as ex:
@@ -36,11 +37,24 @@ def retrieve_cards_by_id(cards_list, mongo_connection):
         )
         cards = []
         for record in response:
-            print(f'Record: {record}')
+            name = record.get('name')
             for card in record.get('data'):
                 if card.get('multiverse_id') in cards_list:
-                    print(f'Adding: {card}')
+                    card['name'] = name
                     cards.append(card)
         return cards
     except Exception as ex:
         logging.error(f'MongoHelper:{ex}')
+
+def retrieve_random_card(cards_list, mongo_connection):
+    
+    response = (
+        mongo_connection.find({"data.multiverse_id": {'$nin': cards_list}})
+    )
+
+    id_list = []
+    for element in response:
+        id_list.append(element.get('data')[0].get('multiverse_id'))
+    
+    return id_list[randint(0, len(id_list))]
+    
