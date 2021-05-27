@@ -22,13 +22,12 @@ class RetrieveBinder(Resource):
 
     def post(self):
             user_id = request.get_json().get('user')
-            print(f'### {user_id}')
             secrets = retrieve_secrets()
             mongo_connection = connect(credentials=secrets, collection='Binders')
             cards_list = retrieve_cards_from_user(user_id, mongo_connection)
             mongo_connection = connect(credentials=secrets, collection='Cards')
             cards = retrieve_cards_by_id(cards_list, mongo_connection)
-            print(f'### {cards}')
+        
             if cards:
                 return jsonify(code = 200, body={"cards": cards})
             else:

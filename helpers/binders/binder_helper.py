@@ -37,8 +37,10 @@ def retrieve_cards_by_id(cards_list, mongo_connection):
         )
         cards = []
         for record in response:
+            name = record.get('name')
             for card in record.get('data'):
                 if card.get('multiverse_id') in cards_list:
+                    card['name'] = name
                     cards.append(card)
         return cards
     except Exception as ex:
@@ -49,7 +51,7 @@ def retrieve_random_card(cards_list, mongo_connection):
     response = (
         mongo_connection.find({"data.multiverse_id": {'$nin': cards_list}})
     )
-    
+
     id_list = []
     for element in response:
         id_list.append(element.get('data')[0].get('multiverse_id'))
