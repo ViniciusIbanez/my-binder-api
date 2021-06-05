@@ -57,4 +57,6 @@ def retrieve_random_card(cards_list, mongo_connection):
         id_list.append(element.get('data')[0].get('multiverse_id'))
     
     return id_list[randint(0, len(id_list))]
+
+
     

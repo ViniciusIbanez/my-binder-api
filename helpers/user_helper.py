@@ -8,4 +8,5 @@ def insert_user(user_info, mongo_connection):
                     {'$set': user_info},
                     upsert = True)
                 )
+    print(f'## InsertingUser response: {response}')
     return response
