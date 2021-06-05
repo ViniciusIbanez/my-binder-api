@@ -63,5 +63,25 @@ def retrieve_random_card(cards_list, mongo_connection):
     
     return id_list[randint(0, len(id_list))]
 
+def retrieve_all_cards(mongo_connection):
+    
+    response  = (
+        mongo_connection.find()
+    )
+
+    cards =  []
+    for element in response:
+        for set in  element.get('data'):
+            card_object  = {
+                'name': element.get('name'),
+                'set_name':  set.get('set_name'),
+                'multiverse_id': set.get('multiverse_id'),
+                'image_url': set.get('image_url')
+            }
+            cards.append(card_object)
+    
+    
+
+    return cards
 
     
