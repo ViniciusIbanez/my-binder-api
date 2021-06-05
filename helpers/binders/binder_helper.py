@@ -48,7 +48,7 @@ def retrieve_cards_by_id(cards_list, mongo_connection):
 
 def retrieve_random_card(cards_list, mongo_connection):
     
-    if len(cards_list) == 0:
+    if cards_list:
         response = (
             mongo_connection.find({"data.multiverse_id": {'$nin': cards_list}})
         )
