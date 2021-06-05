@@ -48,6 +48,7 @@ class  UserInit(Resource):
                 if cards_list:
                     cards_connection =  connect(credentials=secrets, collection='Cards') 
                     cards = retrieve_cards_by_id(cards_list, cards_connection)
+                    print(f'## CARDS: {cards}')
                     if cards:
                          return jsonify(code = 200, body={"cards": cards})
             else:
