@@ -6,6 +6,7 @@ from random import randint
 def insert_cards(cards_object: dict,
              mongo_connection) ->str:
     try:
+        response = None
         for card in cards_object.get('cards'):
             response = (
                 mongo_connection
@@ -15,7 +16,7 @@ def insert_cards(cards_object: dict,
                     upsert = True) )
         return response
     except Exception as ex:
-        logging.error(f'MongoHelper:{ex}')
+        logging.error(f'insert_cards:{ex}')
 
 def retrieve_cards_from_user(user_id, mongo_connection):
     try:
@@ -28,7 +29,7 @@ def retrieve_cards_from_user(user_id, mongo_connection):
             cards = record.get('cards')
         return cards
     except Exception as ex:
-        logging.error(f'MongoHelper:{ex}')
+        logging.error(f'retrieve_cards_from_user:{ex}')
 
 def retrieve_cards_by_id(cards_list, mongo_connection):
     try:
@@ -44,7 +45,7 @@ def retrieve_cards_by_id(cards_list, mongo_connection):
                     cards.append(card)
         return cards
     except Exception as ex:
-        logging.error(f'MongoHelper:{ex}')
+        logging.error(f'retrieve_cards_by_id:{ex}')
 
 def retrieve_random_card(cards_list, mongo_connection):
     
