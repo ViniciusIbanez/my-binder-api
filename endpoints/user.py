@@ -45,6 +45,7 @@ class  UserInit(Resource):
             if user_response:
                 binder_connection =  connect(credentials=secrets, collection='Binder')
                 cards_list = retrieve_cards_from_user(user, binder_connection)
+                print(f'## USER BINDER: {cards_list}')
                 if cards_list:
                     cards_connection =  connect(credentials=secrets, collection='Cards') 
                     cards = retrieve_cards_by_id(cards_list, cards_connection)
