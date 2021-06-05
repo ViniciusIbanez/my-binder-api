@@ -47,14 +47,15 @@ class  UserInit(Resource):
                 cards_list = retrieve_cards_from_user(user, binder_connection)
                 print(f'## USER BINDER: {cards_list}')
                 if not cards_list: 
-                    return  jsonify(code=200, body = {"cards": []})
-                    
-                if cards_list:
+                    cards_object = {"user": user, "cards": []}
+                    insert_cards(cards_object, binder_connection)
+                    cards = []
+                else:
                     cards_connection =  connect(credentials=secrets, collection='Cards') 
                     cards = retrieve_cards_by_id(cards_list, cards_connection)
                     print(f'## CARDS: {cards}')
-                    if cards:
-                         return jsonify(code = 200, body={"cards": cards})
+                
+                return jsonify(code = 200, body={"cards": cards})
             else:
                 return jsonify(code = 403)
         except Exception as e:
