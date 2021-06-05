@@ -43,7 +43,7 @@ class  UserInit(Resource):
             print(f'## USER INIT')
             user_response  = insert_user({'user': user}, user_connection)
             if user_response:
-                binder_connection =  connect(credentials=secrets, collection='Binder')
+                binder_connection = connect(credentials=secrets, collection='Binders')
                 cards_list = retrieve_cards_from_user(user, binder_connection)
                 print(f'## USER BINDER: {cards_list}')
                 if cards_list:
