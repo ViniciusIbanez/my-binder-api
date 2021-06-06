@@ -8,7 +8,7 @@ import json
 
 class Card(Resource):
 
-    def post(self):
+    def get(self):
         
         secrets = retrieve_secrets()
         mongo_connection = connect(credentials=secrets, collection='Cards')
