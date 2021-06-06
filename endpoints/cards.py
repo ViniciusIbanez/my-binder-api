@@ -13,7 +13,6 @@ class Card(Resource):
         secrets = retrieve_secrets()
         mongo_connection = connect(credentials=secrets, collection='Cards')
         cards = retrieve_all_cards(mongo_connection)
-        print(f'CARDS: {cards}')
         if cards:
            return jsonify(code = 200, body={"cards": cards})
         else:
