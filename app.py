@@ -13,7 +13,7 @@ api.add_resource(CardsEtl, '/extract/set')
 api.add_resource(User, '/user/insert')
 api.add_resource(Binder, '/binder/insert-card')
 api.add_resource(RetrieveBinder, '/binder/retrieve')
-api.add_resource(InsertRandom, '/card/insert-random')
+api.add_resource(InsertCard, '/card/insert')
 api.add_resource(UserInit, '/user/init')
 api.add_resource(Card, '/cards/all')
 
