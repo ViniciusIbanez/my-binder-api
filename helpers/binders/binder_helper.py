@@ -67,7 +67,7 @@ def retrieve_random_card(cards_list, mongo_connection):
 def retrieve_all_cards(mongo_connection):
     
     response  = (
-        mongo_connection.find()
+        mongo_connection.find().sort([("$natural", 1)])
     )
 
     cards =  []
