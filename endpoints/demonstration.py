@@ -6,7 +6,7 @@ class Demonstration(Resource):
 
     def get(self):
         
-        message = "Hello World"
+        message = "Olá Mundo"
         if message:
            return jsonify(code = 200, body={"data": message})
         else:
