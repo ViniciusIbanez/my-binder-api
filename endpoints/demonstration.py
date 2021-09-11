@@ -21,5 +21,5 @@ class Demonstration(Resource):
             message = f'Acesso liberado para o cartao {user_card} !! '
             return jsonify(code = 200, body={"data": message})
         else:
-            message = f'Cartão {user_card} nao cadastrado !! '
+            message = f'Cartao {user_card} nao cadastrado !! '
             return jsonify(code = 403, body={"data": message})
