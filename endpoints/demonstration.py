@@ -19,7 +19,7 @@ class Demonstration(Resource):
 
         print(card)
 
-        message = "Request recebido !!"
+        message = f'Request recebido !! Cartão: {card}'
         if message:
             return jsonify(code = 200, body={"data": message})
         else:
