@@ -15,12 +15,11 @@ class Demonstration(Resource):
     def post(self):
         request_data = request.get_json()
         print(f'## Request Payload: {request_data}')
-        card  =  request_data['user']
-
-        print(card)
-
-        message = f'Request recebido !! Cartão: {card}'
-        if message:
+        user_card  =  request_data['user']
+        white_list = ['1302222130']
+        if user_card in white_list:
+            message = f'Acesso liberado para o cartao {user_card} !! '
             return jsonify(code = 200, body={"data": message})
         else:
-            return jsonify(code = 404)
+            message = f'Cartão {user_card} nao cadastrado !! '
+            return jsonify(code = 403, body={"data": message})
